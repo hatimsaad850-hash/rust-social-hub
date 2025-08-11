@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Master Rust — Ultimate Guide to Get Better</title>
+<style>
+  /* Reset & base */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #121212;
+    color: #eee;
+    line-height: 1.6;
+  }
+  a {
+    color: #ff652f;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a:hover, a:focus {
+    color: #ff9b71;
+  }
+  header {
+    background: linear-gradient(135deg, #ff652f 0%, #b33015 100%);
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: 0 4px 10px rgb(255 101 47 / 0.6);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  header h1 {
+    margin: 0;
+    font-weight: 900;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 3px #7a2b11;
+  }
+  header p {
+    margin: 0.5rem 0 0;
+    font-style: italic;
+    font-weight: 600;
+    color: #ffd1b8cc;
+  }
+  nav {
+    background: #1e1e1e;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem 0;
+    position: sticky;
+    top: 88px; /* header height */
+    z-index: 999;
+  }
+  nav a {
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 0.3rem 0;
+    border-bottom: 2px solid transparent;
+  }
+  nav a.active, nav a:hover {
+    border-color: #ff652f;
+    color: #ff7f50;
+  }
+  main {
+    display: flex;
+    max-width: 1100px;
+    margin: 2rem auto;
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+  /* Sidebar */
+  aside {
+    flex: 1 1 250px;
+    background: #222;
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
+    position: sticky;
+    top: 140px;
+    height: fit-content;
+    box-shadow: 0 0 15px rgb(255 101 47 / 0.3);
+  }
+  aside h3 {
+    margin-top: 0;
+    color: #ff652f;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+  }
+  aside ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  aside ul li {
+    margin-bottom: 0.9rem;
+    cursor: pointer;
+    color: #ffd1b8;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    position: relative;
+  }
+  aside ul li:hover {
+    color: #ff7f50;
+  }
+  aside ul li::before {
+    content: "►";
+    color: #ff652f;
+    position: absolute;
+    left: -1.2rem;
+    top: 0;
+  }
+
+  /* Content sections */
+  section {
+    flex: 3 1 0;
+    background: #1f1f1f;
+    border-radius: 12px;
+    padding: 2rem 2.5rem;
+    box-shadow: 0 0 25px rgb(255 101 47 / 0.15);
+  }
+  section h2 {
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 3px solid #ff652f;
+    padding-bottom: 0.3rem;
+  }
+  section ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  section ul li {
+    margin-bottom: 1.2rem;
+    padding-left: 2.5rem;
+    position: relative;
+    font-size: 1.1rem;
+  }
+  section ul li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: #ff652f;
+    font-weight: bold;
+  }
+  section ul li span.tip {
+    font-weight: 700;
+    color: #ff7f50;
+  }
+
+  /* Tooltip style for tips */
+  section ul li:hover span.tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+  span.tooltip {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    left: 110%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ff652f;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    font-weight: 600;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    box-shadow: 0 0 10px #ff652f88;
+    z-index: 100;
+  }
+
+  footer {
+    text-align: center;
+    padding: 1rem 1rem;
+    margin-top: 3rem;
+    background: #161616;
+    color: #777;
+    font-size: 0.9rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    main {
+      flex-direction: column;
+    }
+    aside {
+      position: static;
+      top: auto;
+      margin-bottom: 2rem;
+      height: auto;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Master Rust</h1>
+  <p>Your Ultimate Guide to Get Better at Rust</p>
+</header>
+
+<nav>
+  <a href="#beginner" class="active">Beginner</a>
+  <a href="#intermediate">Intermediate</a>
+  <a href="#advanced">Advanced</a>
+</nav>
+
+<main>
+  <aside>
+    <h3>Quick Rust Tips</h3>
+    <ul>
+      <li data-section="beginner">Gather resources early</li>
+      <li data-section="beginner">Build a basic base ASAP</li>
+      <li data-section="intermediate">Upgrade walls & doors</li>
+      <li data-section="intermediate">Master gun recoil control</li>
+      <li data-section="advanced">Learn raid strategies</li>
+      <li data-section="advanced">Control map zones</li>
+    </ul>
+  </aside>
+
+  <section id="beginner">
+    <h2>Beginner Tips</h2>
+    <ul>
+      <li><span class="tip">Resource Gathering</span> – Start by collecting wood, stone, and food to survive. <span class="tooltip">Focus on trees, rocks, and animals nearby.</span></li>
+      <li><span class="tip">Build a Simple Base</span> – Craft a small shelter with a door and storage boxes to protect yourself from other players.</li>
+      <li><span class="tip">Craft Tools Early</span> – Make hatchets, pickaxes, and bows to speed up gathering and defend yourself.</li>
+      <li><span class="tip">Explore Safely</span> – Avoid hot zones like monuments at first; scout quietly and learn the map layout.</li>
+    </ul>
+  </section>
+
+  <section id="intermediate">
+    <h2>Intermediate Tips</h2>
+    <ul>
+      <li><span class="tip">Upgrade Base Materials</span> – Replace wood walls with stone and metal to withstand raids better.</li>
+      <li><span class="tip">Effective Raiding</span> – Learn how to use satchels and explosives to raid enemy bases efficiently.</li>
+      <li><span class="tip">Combat Mastery</span> – Practice aiming, recoil control, and using cover to survive PvP fights.</li>
+      <li><span class="tip">Play with a Team</span> – Join or create a squad to increase your survivability and resource sharing.</li>
+    </ul>
+  </section>
+
+  <section id="advanced">
+    <h2>Advanced Tips</h2>
+    <ul>
+      <li><span class="tip">Map Control</span> – Secure and control strategic zones to dominate resources and chokepoints.</li>
+      <li><span class="tip">Efficient Farming</span> – Plan your farming routes for maximum resource yield with minimal risk.</li>
+      <li><span class="tip">Advanced Weaponry</span> – Use custom loadouts and attachments to gain an edge in combat.</li>
+      <li><span class="tip">Adapt Strategy</span> – Analyze enemy behavior and change tactics to outsmart your opponents.</li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 Master Rust Guide • Follow us on <a href="#" aria-label="Twitter">Twitter</a>, <a href="#" aria-label="Discord">Discord</a>, and <a href="#" aria-label="YouTube">YouTube</a>
+</footer>
+
+<script>
+  // Smooth scroll nav
+  document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelectorAll('nav a').forEach(el => el.classList.remove('active'));
+      link.classList.add('active');
+      const target = document.querySelector(link.getAttribute('href'));
+      target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Quick tips sidebar interaction
+  document.querySelectorAll('aside ul li').forEach(item => {
+    item.addEventListener('click', () => {
+      const sectionId = item.getAttribute('data-section');
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+        // highlight nav and section
+        document.querySelectorAll('nav a').forEach(el => el.classList.remove('active'));
+        document.querySelector(`nav a[href="#${sectionId}"]`).classList.add('active');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
